@@ -219,6 +219,7 @@ var final_transcript = '';
 var recognizing = false;
 var ignore_onend;
 var start_timestamp;
+var words;
 //array of things
 
 if (!('webkitSpeechRecognition' in window)) {
@@ -399,7 +400,7 @@ function showButtons(style) {
 }
 
 window.setInterval(function(){
-      showInfo('info_no_speech');
-}, 2000);
+      document.getElementById("demo").innerHTML = words;;
+}, 5000);
 
 </script>
