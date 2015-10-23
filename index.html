@@ -219,6 +219,8 @@ var final_transcript = '';
 var recognizing = false;
 var ignore_onend;
 var start_timestamp;
+//array of things
+
 if (!('webkitSpeechRecognition' in window)) {
   upgrade();
 } else {
@@ -273,6 +275,8 @@ if (!('webkitSpeechRecognition' in window)) {
       createEmail();
     }
   };
+  
+  //I think this is where each word can be taken
   recognition.onresult = function(event) {
     var interim_transcript = '';
     for (var i = event.resultIndex; i < event.results.length; ++i) {
@@ -290,6 +294,27 @@ if (!('webkitSpeechRecognition' in window)) {
     }
   };
 }
+
+// Takes a string as input, and returns the number of 
+// words as output.
+// Ex: "The quick brown fox jumps over the lazy dog" would return 9.
+function get_word_count(str) {
+  if (str.length == 0) {
+	return 0;
+  } else {
+	return str.match(/\S+/g).length;
+  }
+}
+// Takes an array as input, and returns the sum 
+// of the array as output.
+// Ex: The array sum of [0, 1, 2, 3] is 6.
+// array_sum([0, 1, 2, 3]) = 6
+function array_sum(arr) {
+  return arr.reduce(function(a, b) {
+	return a + b;
+  });
+}
+
 function upgrade() {
   start_button.style.visibility = 'hidden';
   showInfo('info_upgrade');
@@ -372,4 +397,9 @@ function showButtons(style) {
   copy_info.style.display = 'none';
   email_info.style.display = 'none';
 }
+
+window.setInterval(function(){
+console.log("Print every two seconds");
+}, 2000);
+
 </script>
