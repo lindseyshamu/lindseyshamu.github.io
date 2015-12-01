@@ -1,30 +1,49 @@
+<!doctype html>
 <html>
   <head>
-    <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
-    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- STYLESHEETS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" >
+    <link rel="stylesheet" href="css/chat.css">
+
+    <title>Firebase Cloud Chat</title>
   </head>
+
   <body>
-    <div id='messagesDiv'></div>
-    <input type='text' id='nameInput' placeholder='Name'>
-    <input type='text' id='messageInput' placeholder='Message'>
-    <script>
-      var myDataRef = new Firebase('https://iybrsvxmkgi.firebaseio-demo.com/');
-      $('#messageInput').keypress(function (e) {
-        if (e.keyCode == 13) {
-          var name = $('#nameInput').val();
-          var text = $('#messageInput').val();
-          myDataRef.push({name: name, text: text});
-          $('#messageInput').val('');
-        }
-      });
-      myDataRef.on('child_added', function(snapshot) {
-var message = snapshot.val();
-displayChatMessage(message.name, message.text);
-      });
-      function displayChatMessage(name, text) {
-        $('<div/>').text(text).prepend($('<em/>').text(name+': ')).appendTo($('#messagesDiv'));
-        $('#messagesDiv')[0].scrollTop = $('#messagesDiv')[0].scrollHeight;
-      };
-    </script>
+    <div class="example-chat l-demo-container">
+      <img class="example-chat-logo" src="images/cloud-chat-logo.png" />
+
+      <header>
+        <!-- APP TITLE -->
+        <div class="example-chat-toolbar">
+          <h2>Cloud Chat App</h2>
+        </div>
+
+        <!-- NAME FIELD -->
+        <div class='example-chat-username-field'>
+          <div class="example-chat-avatar"><i class="fa fa-bolt"></i></div>
+          <input type='text' id='username' placeholder='Enter your name...'>
+        </div>
+      </header>
+
+      <!-- EMPTY MESSAGE LIST -->
+      <ul id='messages' class="example-chat-messages"></ul>
+
+      <!-- MESSAGE INPUT FIELD -->
+      <footer>
+        <i class="fa fa-comment-o icon-chat"></i>
+        <input type='text' id='new-message'  placeholder='Type a message...'>
+      </footer>
+    </div>
+
+
+    <!-- FIREBASE, JQUERY -->
+    <script src="https://cdn.firebase.com/js/client/2.0.2/firebase.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+
+    <!-- CHAT.JS FILE -->
+    <script src="js/chat.js"></script>
   </body>
 </html>
